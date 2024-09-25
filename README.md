@@ -93,3 +93,65 @@ testLet();
 - Always use `let` and `const` for block scoping.
 - Be cautious about global variables to avoid unexpected side effects.
 - Ensure variables are declared in the correct scope for proper access.
+
+
+
+
+# JavaScript Variable Declarations: `var`, `let`, and `const`
+
+This repository demonstrates the differences between `var`, `let`, and `const` in JavaScript. These keywords are used to declare variables but behave differently in terms of scope, hoisting, and mutability. Below are examples to help you understand these differences.
+
+## Table of Contents
+- [var](#var)
+- [let](#let)
+- [const](#const)
+- [Summary](#summary)
+
+## `var`
+- **Scope**: `var` is function-scoped. If declared inside a function, it is accessible throughout the entire function. If declared outside any function, it is globally scoped.
+- **Hoisting**: `var` is hoisted, which means its declaration is moved to the top of its scope and initialized as `undefined`.
+- **Re-declaration**: Variables declared with `var` can be re-declared in the same scope.
+
+#### Code Example:
+```js
+function varExample() {
+  var x = 10;
+  if (true) {
+    var x = 20;  // Re-declared within the same function scope
+    console.log(x);  // Outputs 20
+  }
+  console.log(x);  // Outputs 20 (same variable is accessible outside the block)
+}
+
+varExample();
+
+20
+20
+
+
+function letExample() {
+  let x = 10;
+  if (true) {
+    let x = 20;  // Block-scoped variable
+    console.log(x);  // Outputs 20 (inside block)
+  }
+  console.log(x);  // Outputs 10 (outer variable remains unchanged)
+}
+
+letExample();
+
+20
+10
+
+
+function constExample() {
+  const x = 10;
+  // x = 20;  // Error: Assignment to constant variable
+
+  const obj = { value: 10 };
+  obj.value = 20;  // Allowed because we are changing the object's property, not reassigning the variable
+  console.log(obj.value);  // Outputs 20
+}
+
+constExample();
+20

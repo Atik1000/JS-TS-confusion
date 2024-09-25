@@ -26,8 +26,26 @@ exampleFunction();
 let name = "John"; // Declared globally
 
 function exampleFunction() {
-  console.log(name); // Accessible
+  console.log(name); // Accessible globally
 }
 
 exampleFunction();
 
+function testVar() {
+  if (true) {
+    var x = 10;
+  }
+  console.log(x); // Outputs 10, 'var' is function-scoped, not block-scoped
+}
+
+testVar();
+
+
+function testLet() {
+  if (true) {
+    let x = 10;
+  }
+  console.log(x); // Error: 'x' is not defined because 'let' respects block scope
+}
+
+testLet();
