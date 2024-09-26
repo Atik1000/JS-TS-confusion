@@ -155,3 +155,85 @@ function constExample() {
 
 constExample();
 20
+
+
+
+
+# JavaScript Closures
+
+## What is a Closure?
+
+A closure is a feature in JavaScript  whre an inner function has access to the outer function's variables. This means that the inner function can "remember" the environment in which it was created, even after the outer function has finished executing. Closures are often used to create private variables or to maintain state in asynchronous programming.
+
+## How Closures Work
+
+When a function is created in JavaScript, it forms a closure that includes the function's scope and the scope of its parent functions. This allows the inner function to access variables from the outer function even after the outer function has returned.
+
+## Example Code
+
+Here are some examples to illustrate how closures work:
+
+### Example 1: Basic Closure
+
+```javascript
+function outerFunction() {
+    let outerVariable = 'I am from outer function';
+
+     funcion innerFunction() {
+        console.log(outerVariable); // Accessing outerVariable
+    }
+
+    return innerFunction; // Returning the inner function
+}
+
+const myClosure = outerFunction(); // outerFunction is executed
+myClosure(); // Output: I am from outer function
+```
+
+### Example 2: Closure with Parameters
+
+```javascript
+function makeCounter() {
+    let count = 0; // Private variable
+
+    return function() {
+        count += 1; // Increment the count
+        return count; // Return the current count
+    };
+}
+
+const counter = makeCounter();
+console.log(counter()); // Output: 1
+console.log(counter()); // Output: 2
+console.log(counter()); // Output: 3
+```
+
+### Example 3: Using Closures for Data Privacy
+
+```javascript
+function createPerson(name) {
+    let age = 0; // Private variable
+
+    return {
+        getName: function() {
+            return name; // Accessing name
+        },
+        getAge: function() {
+            return age; // Accessing age
+        },
+        setAge: function(newAge) {
+             age = newAge; // Modifying age
+        }
+    };
+}
+
+const person = createPerson('Alice');
+console.log(person.getName()); // Output: Alice
+console.log(person.getAge()); // Output: 0
+person.setAge(25);
+console.log(person.getAge()); // Output: 25
+```
+
+## Conclusion
+
+Closures are a powerful feature in JavaScript that allow for data encapsulation and the creation of private variables. Understanding closures is essential for mastering JavaScript, especially when dealing with asynchronous code and callbacks.
