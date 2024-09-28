@@ -321,3 +321,105 @@ let myLetVar = 5;
 - The `README.md` file includes well-structured sections such as **Variable Hoisting Example**, **Function Hoisting Example**, and **Hoisting with `let` and `const`**.
 - It explains the hoisting behavior with examples and detailed explanations for each case.
 - JavaScript code snippets are wrapped inside triple backticks (` ```javascript `) for proper syntax highlighting in Markdown.
+
+
+
+
+```markdown
+# JavaScript Prototypes
+
+In JavaScript, **prototypes** are a fundamental concept used to implement inheritance and to allow objects to share properties and methods. Every JavaScript object has a prototype, which is also an object, and it serves as a template from which the object inherits properties and methods.
+
+## Key Concepts of JavaScript Prototypes
+
+### 1. Prototype Property
+Every function in JavaScript has a property called `prototype`. This property is an object that is used to attach properties and methods that should be inherited by instances of that function when it is used as a constructor.
+
+```javascript
+function Person(name) {
+    this.name = name;
+}
+
+Person.prototype.greet = function() {
+    console.log(`Hello, my name is ${this.name}.`);
+};
+
+const john = new Person('John');
+john.greet(); // Output: Hello, my name is John.
+```
+
+### 2. Prototype Chain
+When you try to access a property of an object, JavaScript will first look at the object itself. If the property is not found, it will look up the prototype chain until it finds the property or reaches the end of the chain (null).
+
+```javascript
+const animal = {
+    speak: function() {
+        console.log('Animal speaks');
+    }
+};
+
+const dog = Object.create(animal);
+dog.bark = function() {
+    console.log('Dog barks');
+};
+
+dog.bark(); // Output: Dog barks
+dog.speak(); // Output: Animal speaks (inherited from animal prototype)
+```
+
+### 3. Constructor Functions
+Constructor functions are used to create objects. When you use the `new` keyword with a constructor function, the new object created inherits from the constructor's `prototype`.
+
+```javascript
+function Car(make, model) {
+    this.make = make;
+    this.model = model;
+}
+
+Car.prototype.getDetails = function() {
+    return `${this.make} ${this.model}`;
+};
+
+const myCar = new Car('Toyota', 'Corolla');
+console.log(myCar.getDetails()); // Output: Toyota Corolla
+```
+
+### 4. Overriding Prototype Properties
+You can override prototype properties for specific instances.
+
+```javascript
+const animal = {
+    sound: 'generic sound',
+    speak: function() {
+        console.log(this.sound);
+    }
+};
+
+const cat = Object.create(animal);
+cat.sound = 'meow';
+cat.speak(); // Output: meow
+```
+
+### 5. Checking Prototypes
+You can check if an object inherits from a certain prototype using the `instanceof` operator or the `isPrototypeOf()` method.
+
+```javascript
+console.log(myCar instanceof Car); // Output: true
+console.log(animal.isPrototypeOf(cat)); // Output: true
+```
+
+### 6. Prototype vs. Object Properties
+Properties defined on the prototype are shared across all instances. In contrast, properties defined directly on an object instance are unique to that instance.
+
+```javascript
+const obj1 = new Person('Alice');
+const obj2 = new Person('Bob');
+
+console.log(obj1.greet === obj2.greet); // Output: true (shared method)
+```
+
+## Summary
+- **Prototypes** allow objects to share methods and properties, enabling inheritance and reducing memory usage.
+- They create a chain that allows properties and methods to be accessed through a series of objects.
+- Understanding prototypes is essential for mastering JavaScript's object-oriented programming capabilities.
+```
